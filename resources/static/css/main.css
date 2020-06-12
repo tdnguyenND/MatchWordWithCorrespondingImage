@@ -1,0 +1,78 @@
+*{
+	border: none;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+body{
+	height: 100vh;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#game-container{
+	min-width: 747px;
+	min-height: 457px;
+	position: relative;
+	width: 80%;
+	margin: auto;
+	background-color: rgb(231, 231, 231);
+	padding: 20px 0px 60px;
+	border-radius: 15px;
+	box-shadow: 0 0 5px gray;
+}
+.images-target{
+	display: flex;
+	justify-content: space-around;
+}
+.single-image-container{
+	width: 19%;
+	height: 250px;
+	min-height: 250px;
+}
+.animal-name-area{
+	width: 100%;
+	height: 100px;
+	display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.animal-name-container{
+	border: dashed 2px rgb(18, 97, 201);
+	border-radius: 12px;
+	padding: 5px 12px;
+	margin: auto;
+	min-width: 50px;
+	min-height: 40px;
+	display: inline-block;
+}
+.animal-image{
+	background-position: center;
+	height: 200px;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.names-drag{
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 20px;
+	color: white;
+	margin-top: 170px;
+	justify-content: space-around;
+	text-align: center;
+}
+.names-drag > span{
+	background-color: rgb(68, 165, 230);
+	border-radius: 10px;
+	padding: 5px 12px;
+}
+.animal-name-area > div{
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 20px;
+	text-align: center;
+}
+
+.animal-name{
+	margin: 0 20px;
+	user-select: none;
+	cursor: pointer;
+}
