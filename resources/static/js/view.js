@@ -10,6 +10,7 @@ function openTheGame(){
 
 	renderImages(imgs);
 	renderNames(names);
+	addMovingEvent();
 }
 
 function renderImages(imgs){
