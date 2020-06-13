@@ -32,13 +32,19 @@ function addMovingEvent(){
 			document.removeEventListener('mousemove', followCursor);
 			document.removeEventListener('mouseup', dropDown);
 
-			self.css({margin: previousMargin, position: '', left: '', top: ''});
+			self.css({position: '', left: '', top: ''});
 
 			try{
 				tryToMatch(event, self[0]);
 				self.off('mousedown', startMoving);
+				if (!endOfStage()){
+					new Audio('./resources/static/audio/correct.mp3').play();
+				}else {
+					new Audio('./resources/static/audio/finish-stage.mp3').play()
+				}
 			}catch(err){
-				
+				new Audio('./resources/static/audio/incorrect.mp3').play();
+				self.css({margin: previousMargin})
 			}
 		}
 	})
@@ -84,4 +90,8 @@ function getAnimalName(dragElement){
 function moveNameToCard(name, card){
 	name.style.margin = '0 0';
 	card.getElementsByClassName('animal-name-container')[0].appendChild(name);
+}
+
+function endOfStage(){
+	return !$('.names-drag .animal-name').length;
 }
