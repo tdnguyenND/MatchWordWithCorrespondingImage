@@ -43,10 +43,20 @@ function createAnimalImageElement(imgPath){
 }
 
 function renderNames(names){
-	names.forEach(name=>{
-		let nameElement = createSingleNameElement(name);
-		namesContainer.appendChild(nameElement);
-	})
+	while (names.length > 0){
+		let name = popRandom(names);
+		renderSingleName(name);
+	}
+}
+
+function popRandom(names){
+	let randomIndex = Math.floor(Math.random() * names.length);
+	return names.splice(randomIndex, 1);
+}
+
+function renderSingleName(name){
+	let nameElement = createSingleNameElement(name);
+	namesContainer.appendChild(nameElement);
 }
 
 function createSingleNameElement(name){
@@ -57,4 +67,11 @@ function createSingleNameElement(name){
 	return element;
 }
 
+function clearTheGame(){
+	imgContainer.innerHTML = '';
+	namesContainer.innerHTML = '';
+}
+
 openTheGame();
+document.getElementById('theme-song').volume = 0.05;
+document.getElementById('theme-song').play();

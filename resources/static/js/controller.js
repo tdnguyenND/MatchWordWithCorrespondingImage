@@ -1,8 +1,5 @@
-function getAnimalCards() {
-	return animalCards;
-}
-
 const gameContainer = $('#game-container');
+const NAME_NOT_MATCH = "Name and image not match";
 
 function addMovingEvent(){
 	$('.draggable').mousedown(function startMoving(event){
@@ -40,11 +37,23 @@ function addMovingEvent(){
 				if (!endOfStage()){
 					new Audio('./resources/static/audio/correct.mp3').play();
 				}else {
-					new Audio('./resources/static/audio/finish-stage.mp3').play()
+						new Audio('./resources/static/audio/finish-stage.mp3').play();
+					try{
+						setTimeout(()=>{
+							clearTheGame();
+							openTheGame();
+						}, 300)
+					}catch(err){
+						if (err === OUT_OF_QUEST){
+							setTimeOut(alert('Congratulation!'), 300);
+						}
+					}
 				}
 			}catch(err){
-				new Audio('./resources/static/audio/incorrect.mp3').play();
-				self.css({margin: previousMargin})
+				if (err === NAME_NOT_MATCH){
+					new Audio('./resources/static/audio/incorrect.mp3').play();
+					self.css({margin: previousMargin})
+				}
 			}
 		}
 	})
@@ -58,7 +67,7 @@ function tryToMatch(event, draggedName){
 
 	if (isMatch(name, imgName)) {
 		moveNameToCard(draggedName, card);
-	} else throw "Name and image not match";
+	} else throw NAME_NOT_MATCH;
 }
 
 function getTargetImg(event){

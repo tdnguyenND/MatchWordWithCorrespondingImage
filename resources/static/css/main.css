@@ -4,6 +4,9 @@
 	margin: 0;
 	box-sizing: border-box;
 }
+audio{
+	display: none;
+}
 body{
 	height: 100vh;
 	display: flex;
