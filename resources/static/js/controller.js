@@ -12,16 +12,8 @@ function addMovingEvent(){
 		document.addEventListener('mouseup', dropDown);
 
 		function followCursor(event){
-			let relativeX = event.pageX - gameContainer.offset().left - self.width()/2;
-			let relativeY = event.pageY - gameContainer.offset().top - self.height()/2;
-
-			let minX = 0;
-			let maxX = gameContainer.outerWidth() - self.width();
-			let minY = 0;
-			let maxY = gameContainer.outerHeight() - self.height();
-
-			let x = Math.min(Math.max(relativeX, minX), maxX);
-			let y = Math.min(Math.max(relativeY, minY), maxY);
+			let x = event.pageX - self.width()/2;
+			let y = event.pageY - self.height()/2;
 			self.css({position: 'absolute', left: x + 'px', top: y + 'px'});
 		}
 
@@ -34,23 +26,32 @@ function addMovingEvent(){
 			try{
 				tryToMatch(event, self[0]);
 				self.off('mousedown', startMoving);
+				$('#character').attr('src', './resources/static/image/bravo.gif');
+				setTimeout(()=>{
+					$('#character').attr('src', './resources/static/image/character.gif');
+				}, 3000);
 				if (!endOfStage()){
 					new Audio('./resources/static/audio/correct.mp3').play();
 				}else {
-						new Audio('./resources/static/audio/finish-stage.mp3').play();
-					try{
-						setTimeout(()=>{
+					new Audio('./resources/static/audio/finish-stage.mp3').play();
+					setTimeout(() => {
+						try{
 							clearTheGame();
 							openTheGame();
-						}, 300)
-					}catch(err){
-						if (err === OUT_OF_QUEST){
-							setTimeOut(alert('Congratulation!'), 300);
+						}catch(err){
+							//finish the game
+							if (err === OUT_OF_QUEST){
+								showFinishScreen();
+							}
 						}
-					}
+					}, 300)
 				}
 			}catch(err){
 				if (err === NAME_NOT_MATCH){
+					$('#character').attr('src', './resources/static/image/false-ans.gif');
+					setTimeout(()=>{
+						$('#character').attr('src', './resources/static/image/character.gif');
+					}, 3000);
 					new Audio('./resources/static/audio/incorrect.mp3').play();
 					self.css({margin: previousMargin})
 				}

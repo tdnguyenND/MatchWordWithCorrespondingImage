@@ -16,10 +16,20 @@
 </head>
 
 <body>
+	<h1 class="title">Nối từ với hình ảnh tương ứng</h1>
 	<div id="game-container">
 		<div id="images-container" class="images-target"></div>
 		<div id="names-container" class="names-drag"></div>
 	</div>
+	<div id="character-container">
+		<img id="character" draggable="false" src="./resources/static/image/character.gif" alt="">
+	</div>
+	<div id="finish-popup" class="overlay">
+        <div class="popup">
+            <h2><br>Chúc mừng bạn đã hoàn thành bài học!</h2>
+            <button id='reload-btn'></button>
+        </div>
+    </div>
 	<script src="./resources/static/js/model.js"></script>
 	<script src="./resources/static/js/controller.js"></script>
 	<script src="./resources/static/js/view.js"></script>

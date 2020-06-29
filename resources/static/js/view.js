@@ -2,15 +2,19 @@ const IMG_SOURCE = "./resources/static/image/";
 const imgContainer = $('#images-container')[0];
 const namesContainer = $('#names-container')[0];
 
-function openTheGame(){
-	let cards = getAnimalCards();
+function openTheGame() {
+	try{
+		let cards = getAnimalCards();
 
-	let imgs = cards.map(card => card['image']);
-	let names = cards.map(card => card['name']);
+		let imgs = cards.map(card => card['image']);
+		let names = cards.map(card => card['name']);
 
-	renderImages(imgs);
-	renderNames(names);
-	addMovingEvent();
+		renderImages(imgs);
+		renderNames(names);
+		addMovingEvent();
+	}catch (err){
+		throw err;
+	}
 }
 
 function renderImages(imgs){
@@ -70,6 +74,13 @@ function createSingleNameElement(name){
 function clearTheGame(){
 	imgContainer.innerHTML = '';
 	namesContainer.innerHTML = '';
+}
+
+function showFinishScreen(){
+	$('#finish-popup').css('display', 'block');
+	$('#reload-btn').click(()=>{
+		window.location.reload();
+	})
 }
 
 openTheGame();
