@@ -83,6 +83,19 @@ function showFinishScreen(){
 	})
 }
 
+function characterAnimate(correct){
+	if (correct){
+		setSource('character', 'bravo.gif');
+	}else setSource('character', 'false-ans.gif');
+	setTimeout(()=>{
+		setSource('character', 'character.gif');
+	}, 3000);
+}
+
+function setSource(id, imgName){
+	$('#' + id).attr('src', IMG_SOURCE + imgName)
+}
+
 openTheGame();
 document.getElementById('theme-song').volume = 0.05;
 document.getElementById('theme-song').play();

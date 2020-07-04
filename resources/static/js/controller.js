@@ -1,5 +1,6 @@
 const gameContainer = $('#game-container');
 const NAME_NOT_MATCH = "Name and image not match";
+const AUDIO_SOURCE = './resources/static/audio/';
 
 function addMovingEvent(){
 	$('.draggable').mousedown(function startMoving(event){
@@ -26,38 +27,36 @@ function addMovingEvent(){
 			try{
 				tryToMatch(event, self[0]);
 				self.off('mousedown', startMoving);
-				$('#character').attr('src', './resources/static/image/bravo.gif');
-				setTimeout(()=>{
-					$('#character').attr('src', './resources/static/image/character.gif');
-				}, 3000);
+				characterAnimate(true);
 				if (!endOfStage()){
-					new Audio('./resources/static/audio/correct.mp3').play();
+					playAudio('correct');
 				}else {
-					new Audio('./resources/static/audio/finish-stage.mp3').play();
+					showFinishStageEffect();
 					setTimeout(() => {
 						try{
-							clearTheGame();
-							openTheGame();
+							loadNextStage();
 						}catch(err){
 							//finish the game
 							if (err === OUT_OF_QUEST){
-								showFinishScreen();
+								showFinishGameEffect();
 							}
 						}
-					}, 300)
+					}, 2000)
 				}
 			}catch(err){
 				if (err === NAME_NOT_MATCH){
-					$('#character').attr('src', './resources/static/image/false-ans.gif');
-					setTimeout(()=>{
-						$('#character').attr('src', './resources/static/image/character.gif');
-					}, 3000);
-					new Audio('./resources/static/audio/incorrect.mp3').play();
+					characterAnimate(false);
+					playAudio('incorrect');
 					self.css({margin: previousMargin})
 				}
 			}
 		}
 	})
+}
+
+function loadNextStage() {
+	clearTheGame();
+	openTheGame();
 }
 
 function tryToMatch(event, draggedName){
@@ -69,6 +68,15 @@ function tryToMatch(event, draggedName){
 	if (isMatch(name, imgName)) {
 		moveNameToCard(draggedName, card);
 	} else throw NAME_NOT_MATCH;
+}
+
+function showFinishStageEffect(){
+	playAudio('finish-stage');
+}
+
+function showFinishGameEffect(){
+	showFinishScreen();
+	playAudio('finish-game');
 }
 
 function getTargetImg(event){
@@ -104,4 +112,8 @@ function moveNameToCard(name, card){
 
 function endOfStage(){
 	return !$('.names-drag .animal-name').length;
+}
+
+function playAudio(name){
+	new Audio(AUDIO_SOURCE + name + '.mp3').play();
 }

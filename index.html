@@ -6,6 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="./resources/static/css/main.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<audio
 	controls
@@ -26,8 +28,13 @@
 	</div>
 	<div id="finish-popup" class="overlay">
         <div class="popup">
-            <h2><br>Chúc mừng bạn đã hoàn thành bài học!</h2>
-            <button id='reload-btn'></button>
+			<div class="popup-background">
+				<h2 class="animate__animated animate__bounce animate_slower">Chúc mừng bạn đã hoàn thành bài học!</h2>
+				<img src="./resources/static/image/cup.png" alt="">
+				<div id='reload-btn'>
+					<i class="fas fa-redo-alt"></i>
+				</div>
+			</div>
         </div>
     </div>
 	<script src="./resources/static/js/model.js"></script>
